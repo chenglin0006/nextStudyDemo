@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import Header from '../share/components/header'
 import Num from '../share/components/num'
 import { checkServer } from '../share/utils'
 import styles from "./styles.styl"
@@ -12,11 +11,8 @@ class Home extends Component {
         const userAgent = ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent
         console.log(userAgent,'-----')
         if (checkServer()) {
-          await store.dispatch.num.addNumAsync(2)
+          await store.dispatch.num.addNumAsync()
         }
-        const res = await fetch('https://api.tvmaze.com/search/shows?q=marvel');
-        const data = await res.json();
-        console.log(data.length,'====')
         return { userAgent }
     }
 
@@ -25,7 +21,6 @@ class Home extends Component {
 
     return (
       <div>
-        <Header />
         <h1 className='title'>Welcome to Next.js Home page!</h1>
 
         <div className={styles.stark}>Hi stark</div>
