@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import Header from '../share/components/header'
 import Num from '../share/components/num'
 import { checkServer } from '../share/utils'
-// import styles from "./styles.styl"
+import styles from "./styles.styl"
 
 class Home extends Component {
     static async getInitialProps(ctx) {
@@ -28,8 +28,8 @@ class Home extends Component {
         <Header />
         <h1 className='title'>Welcome to Next.js Home page!</h1>
 
-        {/* <div className={styles.stark}>Hi stark</div> */}
-        <div className={'title styles.stark'}>Hi stark</div>
+        <div className={styles.stark}>Hi stark</div>
+        {/* <div className={'title styles.stark'}>Hi stark</div> */}
 
       <p className='description'>
         To get started, edit <code>pages/index.js</code> and save to reload.
