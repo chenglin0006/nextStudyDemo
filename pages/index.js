@@ -30,7 +30,7 @@ export default function IndexPage() {
     })
   }, 1000)
 
-  funAsy();
+  // funAsy();
 
   return (
     <div>
@@ -46,7 +46,7 @@ export default function IndexPage() {
   )
 }
 
-export function getServerSideProps() {
+export async function getServerSideProps() {
   const reduxStore = initializeStore()
   const { dispatch } = reduxStore
 
@@ -54,6 +54,14 @@ export function getServerSideProps() {
     type: 'TICK',
     light: false,
     lastUpdate: Date.now(),
+  })
+
+  const res = await fetch('https://api.tvmaze.com/search/shows?q=marvel');
+  const data = await res.json();
+  console.log(data.length, '-----');
+  dispatch({
+    type: 'DEMO',
+    str: data.length+2
   })
 
   return { props: { initialReduxState: reduxStore.getState() } }
