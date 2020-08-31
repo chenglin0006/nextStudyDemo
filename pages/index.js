@@ -5,6 +5,7 @@ import Counter from '../components/counter'
 import Clock from '../components/clock'
 import { initializeStore } from '../store'
 import fetch from 'isomorphic-unfetch';
+import Num from '../components/num'
 
 
 async function funAsy() {
@@ -42,6 +43,9 @@ export default function IndexPage() {
         <Clock></Clock>
       </div>
       <Counter></Counter>
+      <div>
+        <Num></Num>
+      </div>
     </div>
   )
 }
