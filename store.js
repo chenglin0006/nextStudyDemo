@@ -8,6 +8,7 @@ const initialState = {
   lastUpdate: 0,
   light: false,
   count: 0,
+  demoStr:'demodemodemo'
 }
 
 const reducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const reducer = (state = initialState, action) => {
         ...state,
         lastUpdate: action.lastUpdate,
         light: !!action.light,
+      }
+    case 'DEMO':
+      return {
+        ...state,
+        demoStr: action.str,
       }
     case 'INCREMENT':
       return {
