@@ -1,0 +1,20 @@
+{
+  "name": "first-next-demo",
+  "version": "1.0.0",
+  "description": "first nextjs demo",
+  "main": "index.js",
+  "author": "luffyZhou",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next -p 3008"
+  },
+  "dependencies": {
+    "next": "^6.1.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-redux": "^7.1.0",
+    "redux": "^3.6.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "redux-devtools-extension": "^2.13.2"
+  }
+}
