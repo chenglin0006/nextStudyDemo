@@ -1,72 +1,66 @@
-import Link from 'next/link'
-import { useDispatch } from 'react-redux'
-import useInterval from '../lib/useInterval'
-import Counter from '../components/counter'
-import Clock from '../components/clock'
-import { initializeStore } from '../store'
-import fetch from 'isomorphic-unfetch';
-import Num from '../components/num'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
+import Header from '../share/components/header'
+import Num from '../share/components/num'
+// import styles from "./styles.styl"
 
-async function funAsy() {
-  const dispatch = useDispatch()
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=marvel');
-  const data = await res.json();
-  console.log(data.length, '-----');
-  dispatch({
-    type: 'DEMO',
-    str: data.length
-  })
-}
+class Home extends Component {
+    static async getInitialProps({ ctx }) {
+        const { store } = ctx;
+        const userAgent = ctx.req ? ctx.req.headers['user-agent'] : ''
+        console.log(userAgent,'-----')
+        const res = await fetch('https://api.tvmaze.com/search/shows?q=marvel');
+        const data = await res.json();
+        console.log(store,'====')
+        return { userAgent }
+    }
 
-export default function IndexPage() {
-  const dispatch = useDispatch()
+  render () {
+    const { counter, increment, incrementBy, incrementAsync,addNumAsync } = this.props
 
-  // Tick the time every second
-  useInterval(() => {
-    dispatch({
-      type: 'TICK',
-      light: true,
-      lastUpdate: new Date(),
-    })
-  }, 1000)
-
-  // funAsy();
-
-  return (
-    <div>
-      Hello World.{' '}
-      <Link href="/about">
-        <a>About</a>
-      </Link>
+    return (
       <div>
-        <Clock></Clock>
+        <Header />
+        <h1 className='title'>Welcome to Next.js Home page!</h1>
+
+        {/* <div className={styles.stark}>Hi stark</div> */}
+        <div className={'title styles.stark'}>Hi stark</div>
+
+      <p className='description'>
+        To get started, edit <code>pages/index.js</code> and save to reload.
+      </p>
+        <h1> Counter </h1>
+        <h3>The count is {counter}</h3>
+        <p>
+          <button onClick={increment}>increment</button>
+          <button onClick={() => increment(1)}>
+            increment (using dispatch function)
+          </button>
+          <button onClick={incrementBy(5)}>increment by 5</button>
+          <button onClick={incrementAsync}>incrementAsync</button>
+          <button onClick={addNumAsync}>addNumAsync</button>
+        </p>
+        <br />
+        <Num userAgent={this.props.userAgent}></Num>
       </div>
-      <Counter></Counter>
-      <div>
-        <Num></Num>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
-export async function getServerSideProps() {
-  const reduxStore = initializeStore()
-  const { dispatch } = reduxStore
+const mapState = state => ({
+  counter: state.counter,
+  num: state.num.num
+})
 
-  dispatch({
-    type: 'TICK',
-    light: false,
-    lastUpdate: Date.now(),
-  })
+const mapDispatch = ({ counter: { increment, incrementAsync }, num:{addNumAsync} }) => ({
+  increment: () => increment(1),
+  incrementBy: amount => () => increment(amount),
+  incrementAsync: () => incrementAsync(1),
+  addNumAsync: amount => addNumAsync(3)
+})
 
-  const res = await fetch('https://api.tvmaze.com/search/shows?q=marvel');
-  const data = await res.json();
-  console.log(data.length, '-----');
-  dispatch({
-    type: 'DEMO',
-    str: data.length+2
-  })
-
-  return { props: { initialReduxState: reduxStore.getState() } }
-}
+export default connect(
+  mapState,
+  mapDispatch
+)(Home)

@@ -20,7 +20,7 @@ const Clock = () => {
   const { lastUpdate, light,demoStr } = useClock()
   return (
     <div className={light ? 'light' : ''}>
-        <div>{formatTime(lastUpdate)}</div>
+        {/* <div>{formatTime(lastUpdate)}</div> */}
         <div>{demoStr}</div>
       <style jsx>{`
         div {
