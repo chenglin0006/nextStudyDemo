@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 
 import Num from '../share/components/num'
 import { checkServer } from '../share/utils'
-import '../share/less/index.less';
+import {Button} from 'antd';
+import {menus} from '../share/config/menu';
+import '../share/less/home.less';
 
 class Home extends Component {
     static async getInitialProps(ctx) {
@@ -46,7 +48,7 @@ class Home extends Component {
           </button>
           <button onClick={incrementBy(5)}>increment by 5</button>
           <button onClick={incrementAsync}>incrementAsync</button>
-          <button onClick={addNumAsync}>addNumAsync</button>
+          <Button type="primary" onClick={addNumAsync}>addNumAsync</Button>
         </p>
         <br />
         <Num userAgent={this.props.userAgent}></Num>
