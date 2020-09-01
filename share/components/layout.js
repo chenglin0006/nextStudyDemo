@@ -1,4 +1,5 @@
 import Header from './header';
+import {Menu, Dropdown, Layout, Icon} from 'antd';
 
 const layoutStyle = {
     margin: 20,
@@ -6,7 +7,7 @@ const layoutStyle = {
     border: '1px solid #DDD'
 }
 
-const Layout = (props) => (
+const LayoutIndex = (props) => (
     <div style={layoutStyle}>
         <Header />
         {props.children}
@@ -20,4 +21,4 @@ const Layout = (props) => (
     </div>
 )
 
-export default Layout
+export default LayoutIndex
