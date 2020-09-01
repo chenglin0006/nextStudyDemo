@@ -16,6 +16,14 @@ class Home extends Component {
         return { userAgent }
     }
 
+    componentDidMount(){
+      console.log('did mount')
+    }
+
+    componentWillReceiveProps(){
+      console.log('props change')
+    }
+
   render () {
     const { counter, increment, incrementBy, incrementAsync,addNumAsync } = this.props
 
