@@ -161,21 +161,24 @@ export default class SiderMenu extends Component {
                 trigger={null}
                 collapsible
                 collapsed={collapsed}
-                className="ant-layout-sider-ie9"
+                className="ant-layout-sider-ie9 left-layout"
                 mode={collapsed ? 'vertical' : 'inline'}
                 width="250px"
             >
-                <Menu
-                    defaultOpenKeys={defaultOpenKeys}
-                    // theme="dark"
-                    mode="inline"
-                    {...menuProps}
-                    onOpenChange={this.handleOpenChange}
-                    selectedKeys={this.getSelectedMenuKeys()}
-                    style={{ width: '100%' }}
-                >
-                    {this.getNavMenuItems(menu)}
-                </Menu>
+                <div className="menu-container">
+                    <Menu
+                        defaultOpenKeys={defaultOpenKeys}
+                        theme="dark"
+                        mode="inline"
+                        {...menuProps}
+                        onOpenChange={this.handleOpenChange}
+                        selectedKeys={this.getSelectedMenuKeys()}
+                        style={{ width: '100%' }}
+                        className="menu-component"
+                    >
+                        {this.getNavMenuItems(menu)}
+                    </Menu>
+                </div>
             </Sider>
         );
     }

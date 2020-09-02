@@ -24,6 +24,31 @@ class LayoutIndex extends Component {
         }
     }
 
+    _setHeight = () => {
+        const windowHeight = window.innerHeight || document.body.offsetHeight;
+        const right = document.querySelector('.right-layout');
+        const left = document.querySelector('.left-layout');
+        const menu = document.querySelector('.menu-component');
+        const isHiddenMenus = window.location.pathname.indexOf('/nomenus') > -1;
+        if (right) {
+            if (isHiddenMenus) {
+                right.style.height = `${windowHeight}px`;
+            } else {
+                right.style.height = `${windowHeight - 64}px`;
+            }
+        }
+        if (left) {
+            left.style.height = `${windowHeight - 64}px`;
+        }
+        if (menu) {
+            menu.style.maxHeight = `${windowHeight - 64}px`;
+        }
+    }
+
+    componentDidMount() {
+        this._setHeight();
+    }
+
     //获取顶部一级菜单
 	_getHeaderMenus = (menus)=> {
 		return menus.map((item) => {
@@ -47,7 +72,7 @@ class LayoutIndex extends Component {
             ? (
                 <SiderMenu
                     location = {{pathname: Tools.checkServer()?router.asPath:location.pathname}}
-                    menu={menus}
+                    menu={menus[0].children}
                     className="menu-component"
                     collapsed={collapsed}
                     setMenuCollapsed={() => { this.setMenuCollapsed(); }}
