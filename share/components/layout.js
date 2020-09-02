@@ -21,6 +21,7 @@ class LayoutIndex extends Component {
         super(props);
         this.state= {
             collapsed: false, //当前侧边栏收起状态
+            headerKey: 'home'
         }
     }
 
@@ -53,10 +54,11 @@ class LayoutIndex extends Component {
 	_getHeaderMenus = (menus)=> {
 		return menus.map((item) => {
 			return (
-				<Menu.Item key={item.url} style={{top: 0}}>
-					<Link href={item.defaultUrl}>
-						<a>{item.name}</a>
-					</Link>
+				<Menu.Item key={item.key} style={{top: 0}}>
+					<span onClick={() => {
+                        this.setState({headerKey:item.key})
+                        Router.push(item.defaultUrl);
+                    }}>{item.name}</span>
 				</Menu.Item>
 			)
 		});
@@ -68,11 +70,17 @@ class LayoutIndex extends Component {
     genMenu = () => {
         const { collapsed } = this.state;
         const {router} = this.props;
+        let sideMenu = [];
+        menus.forEach((ele) => {
+            if(ele.key === this.state.headerKey){
+                sideMenu = ele.children;
+            }
+        })
         return menus
             ? (
                 <SiderMenu
                     location = {{pathname: Tools.checkServer()?router.asPath:location.pathname}}
-                    menu={menus[0].children}
+                    menu={sideMenu}
                     className="menu-component"
                     collapsed={collapsed}
                     setMenuCollapsed={() => { this.setMenuCollapsed(); }}
@@ -121,7 +129,7 @@ class LayoutIndex extends Component {
 						theme="dark"
 						mode="horizontal"
 						defaultSelectedKeys={defaultSelectedHeadKeys}
-						selectedKeys={defaultSelectedHeadKeys}
+						selectedKeys={this.state.headerKey}
 						style={{lineHeight: '64px', display: 'inline-block'}}
 					>
 						{this._getHeaderMenus(menus)}

@@ -168,7 +168,6 @@ export default class SiderMenu extends Component {
                 <div className="menu-container">
                     <Menu
                         defaultOpenKeys={defaultOpenKeys}
-                        theme="dark"
                         mode="inline"
                         {...menuProps}
                         onOpenChange={this.handleOpenChange}

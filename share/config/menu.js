@@ -20,16 +20,33 @@ export const menus = [
                         url:'/'
                     },
                     {
-                        name:'about',
-                        key: 'about',
-                        icon:'appstore',
-                        url:'/about'
-                    },
-                    {
                         name:'home',
                         key: 'home',
                         icon:'appstore',
                         url:'/home'
+                    },
+                ]
+            },
+		]
+    },
+    {
+		name: '测试',
+        key: 'test',
+		icon: 'appstore',
+        defaultUrl: '/about',
+		children: [
+            {
+                name:'about',
+                url:'anju',
+                key: 'anju',
+                icon:'appstore',
+                defaultUrl:'/about',
+                children:[
+                    {
+                        name:'about',
+                        key: 'about',
+                        icon:'appstore',
+                        url:'/about'
                     },
                 ]
             },
