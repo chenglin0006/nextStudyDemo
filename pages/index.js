@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { checkServer } from '../share/utils'
+import { Tools } from '../share/util'
 import '../share/less/index.less';
 
 class Home extends Component {
     static async getInitialProps(ctx) {
         const store = ctx.reduxStore
         const userAgent = ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent
-        console.log(userAgent,'-----')
-        if (checkServer()) {
+        if (Tools.checkServer()) {
           await store.dispatch.num.addNumAsync()
         }
         return { userAgent }
@@ -27,6 +26,7 @@ class Home extends Component {
     return (
       <div>
         <h1 className='title'>Welcome to Next.js Home page!</h1>
+        <h1>{this.props.num}</h1>
       </div>
     )
   }

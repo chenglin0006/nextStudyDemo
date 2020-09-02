@@ -2,18 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import Num from '../share/components/num'
-import { checkServer } from '../share/utils'
+import { Tools } from '../share/util'
 import {Button,Spin} from 'antd';
 import '../share/less/home.less';
 
 class Home extends Component {
     static async getInitialProps(ctx) {
         const store = ctx.reduxStore
+        let initData = [];
         const userAgent = ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent
-        if (checkServer()) {
-          await store.dispatch.num.addNumAsync()
+        if (Tools.checkServer()) {
+         initData = await store.dispatch.num.addNumAsync()
         }
-        return { userAgent }
+        return { userAgent,initData }
     }
 
     componentDidMount(){
@@ -50,6 +51,11 @@ class Home extends Component {
         </p>
         <br />
         <Num userAgent={this.props.userAgent}></Num>
+        <div>{
+            this.props.initData&&this.props.initData.map((ele) => {
+                return <p key={ele.score}>{ele.score}</p>
+            })
+        }</div>
       </Spin>
     )
   }
