@@ -1,23 +1,38 @@
 export const menus = [
 	{
 		name: '家装',
-		url: 'home',
+        url: 'home',
+        key: 'home',
 		icon: 'appstore',
         defaultUrl: '/home',
 		children: [
             {
                 name:'权益管理',
                 url:'anju',
+                key: 'anju',
                 icon:'appstore',
                 defaultUrl:'/home',
                 children:[
                     {
-                        name:'权益卡管理',
+                        name:'index',
+                        key: 'index',
                         icon:'appstore',
-                        url:'/home/anju/equityCard/list'
+                        url:'/'
+                    },
+                    {
+                        name:'about',
+                        key: 'about',
+                        icon:'appstore',
+                        url:'/about'
+                    },
+                    {
+                        name:'home',
+                        key: 'home',
+                        icon:'appstore',
+                        url:'/home'
                     },
                 ]
             },
 		]
-	}
+    },
 ]

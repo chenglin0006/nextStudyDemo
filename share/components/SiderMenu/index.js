@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import 'rc-drawer/assets/index.css';
 import PropTypes from 'prop-types';
 import SiderMenu from './SiderMenu';
+import './index.less'
 
 export default class Index extends Component {
     static propTypes = {

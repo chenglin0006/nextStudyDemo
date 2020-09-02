@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import { Layout, Menu, Icon } from 'antd';
 import  Link from 'next/link';
 import { TreeIterator } from '../../util';
-import { projectName } from '../../../config/config';
-import logoImage from '../../../static/img/logo.jpg';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
 
-@withRouter
 export default class SiderMenu extends Component {
     static propTypes = {
         location: PropTypes.object,
@@ -77,6 +74,7 @@ export default class SiderMenu extends Component {
      * 生成菜单
      */
     getNavMenuItems(menusData) {
+        debugger;
         const { pathname } = this.props.location;
         if (!menusData) {
             return [];
@@ -85,7 +83,7 @@ export default class SiderMenu extends Component {
             if (!item.name) {
                 return null;
             }
-            if (!item.loaded) {
+            if (!item.loaded && false) {
                 return null;
             }
             let itemPath;
@@ -124,12 +122,9 @@ export default class SiderMenu extends Component {
                                 </a>
                             ) : (
                                 <Link
-                                    to={itemPath}
-                                    target={item.target}
-                                    replace={itemPath === pathname}
+                                    href={item.url}
                                 >
-                                    {icon}
-                                    <span>{item.name}</span>
+                                    <a>{item.name}</a>
                                 </Link>
                             )
                         }
@@ -154,21 +149,6 @@ export default class SiderMenu extends Component {
         });
     };
 
-    /**
-     *  菜单顶部logo和标题
-     */
-    genLogo = () => {
-        const {
-            collapsed,
-        } = this.props;
-        return (
-            <div className="logoContainer" style={{ overflow: 'hidden' }}>
-                <Link to="/"><img src={logoImage} alt={projectName} className="logo" /></Link>
-                {collapsed ? '' : <span className="title">{projectName}</span>}
-            </div>
-        );
-    };
-
     render() {
         const {
             collapsed, menu, defaultOpenKeys,
@@ -183,12 +163,11 @@ export default class SiderMenu extends Component {
                 collapsed={collapsed}
                 className="ant-layout-sider-ie9"
                 mode={collapsed ? 'vertical' : 'inline'}
-                width="230px"
+                width="250px"
             >
-                {this.genLogo()}
                 <Menu
                     defaultOpenKeys={defaultOpenKeys}
-                    theme="dark"
+                    // theme="dark"
                     mode="inline"
                     {...menuProps}
                     onOpenChange={this.handleOpenChange}
