@@ -3,15 +3,13 @@ import { connect } from 'react-redux'
 
 import Num from '../share/components/num'
 import { checkServer } from '../share/utils'
-import {Button} from 'antd';
-import {menus} from '../share/config/menu';
+import {Button,Spin} from 'antd';
 import '../share/less/home.less';
 
 class Home extends Component {
     static async getInitialProps(ctx) {
         const store = ctx.reduxStore
         const userAgent = ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent
-        console.log(userAgent,'-----')
         if (checkServer()) {
           await store.dispatch.num.addNumAsync()
         }
@@ -27,10 +25,10 @@ class Home extends Component {
     }
 
   render () {
-    const { counter, increment, incrementBy, incrementAsync,addNumAsync } = this.props
+    const { counter, increment, incrementBy, incrementAsync,addNumAsync,loadingTest } = this.props
 
     return (
-      <div>
+      <Spin spinning={loadingTest}>
         <h1 className='title'>Welcome to Next.js Home page!</h1>
 
         <div className="stark">Hi stark</div>
@@ -52,14 +50,15 @@ class Home extends Component {
         </p>
         <br />
         <Num userAgent={this.props.userAgent}></Num>
-      </div>
+      </Spin>
     )
   }
 }
 
 const mapState = state => ({
   counter: state.counter,
-  num: state.num.num
+  num: state.num.num,
+  loadingTest: state.loading.effects.counter.incrementAsync,
 })
 
 const mapDispatch = ({ counter: { increment, incrementAsync }, num:{addNumAsync} }) => ({

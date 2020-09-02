@@ -3,6 +3,7 @@ import Header2 from './header';
 import {Menu, Dropdown, Layout, Icon} from 'antd';
 import { menus } from "../config/menu";
 import Link from 'next/link'
+import Router from 'next/router'
 
 const {Sider, Header, Content} = Layout;
 const {SubMenu} = Menu;
@@ -74,9 +75,10 @@ class LayoutIndex extends Component {
 			}
 			return (
 				<Menu.Item key={item.url}>
-					<Link href={item.url}>
+					{/* <Link href={item.url}>
 						<Icon type={item.icon}/><span>{item.name}</span>
-					</Link>
+                    </Link> */}
+                    <span>{item.name}</span>
 				</Menu.Item>
 			)
 		})
@@ -107,7 +109,7 @@ class LayoutIndex extends Component {
 		if (currentHeaderMenu == 'welcome' || currentHeaderMenu == 'permission') {
 			currentHeaderMenu = menus[0]['url'];
 		}
-		let subMenus = [];
+        let subMenus = [];
 		for (let i = 0; i < menus.length; i++) {
 			if (menus[i]['url'] === currentHeaderMenu) {
 				subMenus = menus[i]['children'];
@@ -161,7 +163,8 @@ class LayoutIndex extends Component {
 			pathArr.pop();
 			pathArr.push(pathname.replace(/\/((new)|(edit)|(detail)|(show)|(dcDetail)|(saleDetail)|(fixsh)|(fixnj)|(listjz)|(listnj))$/, '/list'));
 			defaultSelectedKeys = pathArr;
-		}
+        }
+        currentHeaderMenu='home'
         return (
             <Layout className="container">
                 <Header className="header">
@@ -197,7 +200,22 @@ class LayoutIndex extends Component {
 								openKeys={this.state.openKeys}
 								onOpenChange={this._onOpenChange}
 							>
-								{this._getMenus(menus, 'home')}
+                                {this._getMenus(menus,currentHeaderMenu)}
+								<SubMenu key="sub2" title="Navigation Two">
+                                    <Menu.Item key="4" onClick={() => {
+                                        Router.push('/')
+                                    }}>index</Menu.Item>
+                                    <Menu.Item key="5" onClick={() => {
+                                        Router.push('/about')
+                                    }}>about</Menu.Item>
+                                    <Menu.Item key="6">
+                                        <Link href='/home'>home</Link>
+                                    </Menu.Item>
+                                    <SubMenu key="sub3" title="Submenu">
+                                        <Menu.Item key="7">Option 7</Menu.Item>
+                                        <Menu.Item key="8">Option 8</Menu.Item>
+                                    </SubMenu>
+                                </SubMenu>
 							</Menu>
 						</div>
 					</Sider>
