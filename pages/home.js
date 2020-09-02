@@ -11,7 +11,7 @@ class Home extends Component {
         const store = ctx.reduxStore
         let initData = [];
         const userAgent = ctx.req ? ctx.req.headers['user-agent'] : navigator.userAgent
-        if (Tools.checkServer()) {
+        if (Tools.checkServer() || true) {
          initData = await store.dispatch.num.addNumAsync()
         }
         return { userAgent,initData }
