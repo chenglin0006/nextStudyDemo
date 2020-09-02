@@ -32,7 +32,7 @@ class LayoutIndex extends Component {
 			return (
 				<Menu.Item key={item.url} style={{top: 0}}>
 					<Link href={item.defaultUrl}>
-						<span>{item.name}</span>
+						<a>{item.name}</a>
 					</Link>
 				</Menu.Item>
 			)
@@ -169,7 +169,7 @@ class LayoutIndex extends Component {
             <Layout className="container">
                 <Header className="header">
                     <div className="logoContainer" style={{overflow: 'hidden'}}>
-                        <Link href="/"><img src="https://res1.bnq.com.cn/FjJl2yF8r1DWzudbfQBLa6lkQadX" alt="牛匠到家平台" className="logo"/></Link>
+                        <Link href="/"><a><img src="https://res1.bnq.com.cn/FjJl2yF8r1DWzudbfQBLa6lkQadX" alt="牛匠到家平台" className="logo"/></a></Link>
                         <span className="title" ref="memberTitle">牛匠到家平台</span>
                     </div>
                     <Menu
@@ -209,7 +209,7 @@ class LayoutIndex extends Component {
                                         Router.push('/about')
                                     }}>about</Menu.Item>
                                     <Menu.Item key="6">
-                                        <Link href='/home'>home</Link>
+                                        <Link href='/home'><a>home</a></Link>
                                     </Menu.Item>
                                     <SubMenu key="sub3" title="Submenu">
                                         <Menu.Item key="7">Option 7</Menu.Item>
