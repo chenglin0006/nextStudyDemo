@@ -122,8 +122,8 @@ class LayoutIndex extends Component {
             <Layout className="container">
                 <Header className="header">
                     <div className="logoContainer" style={{overflow: 'hidden'}}>
-                        <Link href="/"><a><img src="https://res1.bnq.com.cn/FjJl2yF8r1DWzudbfQBLa6lkQadX" alt="牛匠到家平台" className="logo"/></a></Link>
-                        <span className="title" ref="memberTitle">牛匠到家平台</span>
+                        <Link href="/"><a><img src="https://res1.bnq.com.cn/d2c224bc-340c-451d-846b-cb70db8e8666?t=1584754406909" alt="NEXT STUDY" className="logo"/></a></Link>
+                        <span className="title" ref="memberTitle">NEXT STUDY</span>
                     </div>
                     <Menu
 						theme="dark"

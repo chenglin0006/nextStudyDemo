@@ -1,14 +1,12 @@
 export const menus = [
 	{
 		name: '家装',
-        url: 'home',
         key: 'home',
 		icon: 'appstore',
         defaultUrl: '/home',
 		children: [
             {
                 name:'权益管理',
-                url:'anju',
                 key: 'anju',
                 icon:'appstore',
                 defaultUrl:'/home',
@@ -37,7 +35,6 @@ export const menus = [
 		children: [
             {
                 name:'about',
-                url:'anju',
                 key: 'anju',
                 icon:'appstore',
                 defaultUrl:'/about',

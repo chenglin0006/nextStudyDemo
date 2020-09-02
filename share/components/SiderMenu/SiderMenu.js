@@ -37,23 +37,28 @@ export default class SiderMenu extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.defaultOpen && nextProps.menu && nextProps.menu.length > 0) {
+        if (nextProps.location !== this.props.location) {
             this.setState({
-                openKeys: this.getCurrentOpenKey(nextProps.menu),
+                openKeys: this.getCurrentOpenKey(nextProps.menu,nextProps.location.pathname),
             });
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            openKeys: this.getCurrentOpenKey(this.props.menu),
+        });
     }
 
     /**
      *  根据路由地址获取获取当前展开菜单keys
      */
-    getCurrentOpenKey = (menu) => {
+    getCurrentOpenKey = (menu,pathname=this.props.location.pathname) => {
         this.defaultOpen = false;
-        const { location: { pathname } } = this.props;
         return menu ? TreeIterator.filterIncludesParents(menu, (item) => {
-            return pathname.indexOf(item.path) > -1;
+            return pathname.indexOf(item.url) > -1;
         }).map((m) => {
-            return m.key || m.path;
+            return m.key;
         }) : [];
     };
 
@@ -63,10 +68,10 @@ export default class SiderMenu extends Component {
     getSelectedMenuKeys = () => {
         const { location: { pathname }, menu } = this.props;
         const tree = TreeIterator.filter(menu, (item) => {
-            return pathname.indexOf(item.path) > -1;
+            return pathname == item.url;
         });
         return tree.map((m) => {
-            return m.key || m.path;
+            return m.key;
         });
     };
 
@@ -74,7 +79,6 @@ export default class SiderMenu extends Component {
      * 生成菜单
      */
     getNavMenuItems(menusData) {
-        debugger;
         const { pathname } = this.props.location;
         if (!menusData) {
             return [];
