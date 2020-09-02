@@ -6,6 +6,7 @@ import SiderMenu from './SiderMenu';
 import Link from 'next/link'
 import Router from 'next/router'
 import { Tools } from '../util';
+import { TreeIterator } from '../util';
 
 const {Sider, Header, Content} = Layout;
 const {SubMenu} = Menu;
@@ -48,6 +49,14 @@ class LayoutIndex extends Component {
 
     componentDidMount() {
         this._setHeight();
+        const {router} = this.props;
+        let pathname = router.asPath;
+        let keys = TreeIterator.filterIncludesParents(menus, (item) => {
+            return pathname == item.url;
+        }).reverse().map((m) => {
+            return m.key;
+        });
+        this.setState({headerKey: keys[0]})
     }
 
     //获取顶部一级菜单
@@ -98,26 +107,7 @@ class LayoutIndex extends Component {
     };
     
     render(){
-        const {router} = this.props;
-        let defaultSelectedKeys = [];
-        let pathname = router.asPath;
-        let currentHeaderMenu = [];
         let contentPadding = 15, contentMargin = 12;
-        let defaultSelectedHeadKeys = menus && menus[0] && menus[0]['url'] ? [menus[0]['url']] : [];
-        
-        if (pathname.substring(1, pathname.length)) {
-			let pathArr = pathname.split('/');
-			let path = pathname.split('/');
-			currentHeaderMenu = path[1];
-			defaultSelectedHeadKeys = (path[1] === 'welcome' || path[1] === 'permission') ? [menus[0]['url']] : [path[1]];
-			pathArr.shift();
-			pathArr.shift();
-			pathArr.pop();
-			pathArr.pop();
-			pathArr.push(pathname.replace(/\/((new)|(edit)|(detail)|(show)|(dcDetail)|(saleDetail)|(fixsh)|(fixnj)|(listjz)|(listnj))$/, '/list'));
-			defaultSelectedKeys = pathArr;
-        }
-        currentHeaderMenu='home'
         return (
             <Layout className="container">
                 <Header className="header">
@@ -128,7 +118,7 @@ class LayoutIndex extends Component {
                     <Menu
 						theme="dark"
 						mode="horizontal"
-						defaultSelectedKeys={defaultSelectedHeadKeys}
+						defaultSelectedKeys={this.state.headerKey}
 						selectedKeys={this.state.headerKey}
 						style={{lineHeight: '64px', display: 'inline-block'}}
 					>
@@ -139,42 +129,6 @@ class LayoutIndex extends Component {
                     {
                         this.genMenu()
                     }
-					{/* <Sider
-						width={250}
-						trigger={null}
-						collapsible
-						collapsed={this.state.collapsed}
-						style={{background: '#fff', paddingTop: '5px'}}
-						className="ant-layout-sider-ie9 left-layout"
-					>
-						<div className="menu-container">
-							<Menu
-								mode={this.state.collapsed ? 'vertical' : 'inline'}
-								selectedKeys={defaultSelectedKeys}
-								onSelect={this._onSelect}
-								className="menu-component"
-								openKeys={this.state.openKeys}
-								onOpenChange={this._onOpenChange}
-							>
-                                {this._getMenus(menus,currentHeaderMenu)}
-								<SubMenu key="sub2" title="Navigation Two">
-                                    <Menu.Item key="4" onClick={() => {
-                                        Router.push('/')
-                                    }}>index</Menu.Item>
-                                    <Menu.Item key="5" onClick={() => {
-                                        Router.push('/about')
-                                    }}>about</Menu.Item>
-                                    <Menu.Item key="6">
-                                        <Link href='/home'><a>home</a></Link>
-                                    </Menu.Item>
-                                    <SubMenu key="sub3" title="Submenu">
-                                        <Menu.Item key="7">Option 7</Menu.Item>
-                                        <Menu.Item key="8">Option 8</Menu.Item>
-                                    </SubMenu>
-                                </SubMenu>
-							</Menu>
-						</div>
-					</Sider> */}
 					<Layout className='right-layout' style={{background: '#eee', overflowX: 'auto'}}>
 						<Content style={{
 							background: '#fff',
