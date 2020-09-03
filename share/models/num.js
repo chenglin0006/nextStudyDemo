@@ -1,6 +1,7 @@
 export default {
     state: {
-        num:13
+        num:13,
+        cityList: []
     },
     reducers: {
       add: (state, org) => {
@@ -8,7 +9,13 @@ export default {
             ...state,
             num: state.num + org
         }
-      }
+      },
+      setCityList: (state, org) => {
+        return {
+            ...state,
+            cityList: org
+        }
+      },
     },
     effects: {
       async addNumAsync (payload, rootState) {
@@ -17,6 +24,13 @@ export default {
         const data = await res.json();
         this.add(data.length);
         return data;
-      }
+      },
+      async cityListAsync (payload, rootState) {
+        let res = await fetch('http://web.futureshop.dev-zt.bnq.com.cn:3008/drmAdmin/serviceAreaConfig/cities');
+        res = await res.json();
+        const data = await res.result.data.cityList;
+        this.setCityList(data);
+        return data;
+      },
     }
   }

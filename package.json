@@ -6,7 +6,8 @@
   "author": "luffyZhou",
   "license": "MIT",
   "scripts": {
-    "dev": "next -p 3008",
+    "raw": "next -p 3008",
+    "dev": "node server.js",
     "build": "next build",
     "start": "next start"
   },
@@ -24,5 +25,9 @@
     "react-redux": "^7.1.0",
     "redux": "^3.6.0",
     "redux-devtools-extension": "^2.13.2"
+  },
+  "devDependencies": {
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^1.0.5"
   }
 }

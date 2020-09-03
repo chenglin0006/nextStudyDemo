@@ -26,7 +26,7 @@ class Home extends Component {
     }
 
   render () {
-    const { counter, increment, incrementBy, incrementAsync,addNumAsync,loadingTest } = this.props
+    const { counter, increment, incrementBy, incrementAsync,addNumAsync,loadingTest,cityList,cityListAsync } = this.props
 
     return (
       <Spin spinning={loadingTest}>
@@ -57,6 +57,16 @@ class Home extends Component {
                 return <p key={ele.score}>{ele.score}</p>
             })
         }</div>
+        <div>
+            <Button type="primary" onClick={cityListAsync}>cityListAsync</Button>
+            <div>
+                {
+                    cityList.map((ele) => {
+                        return <p key={ele.code}>{ele.name}</p>
+                    })
+                }
+            </div>
+        </div>
       </Spin>
     )
   }
@@ -65,14 +75,16 @@ class Home extends Component {
 const mapState = state => ({
   counter: state.counter,
   num: state.num.num,
+  cityList: state.num.cityList,
   loadingTest: state.loading.effects.counter.incrementAsync,
 })
 
-const mapDispatch = ({ counter: { increment, incrementAsync }, num:{addNumAsync} }) => ({
+const mapDispatch = ({ counter: { increment, incrementAsync }, num:{addNumAsync,cityListAsync} }) => ({
   increment: () => increment(1),
   incrementBy: amount => () => increment(amount),
   incrementAsync: () => incrementAsync(1),
-  addNumAsync: amount => addNumAsync(3)
+  addNumAsync: amount => addNumAsync(3),
+  cityListAsync: () => cityListAsync(),
 })
 
 export default connect(
