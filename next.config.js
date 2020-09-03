@@ -4,11 +4,11 @@ module.exports = withLess({
     lessLoaderOptions : {
         javascriptEnabled : true
     },
-    exportPathMap: async function (defaultPathMap) {
-        return {
-          '/': { page: '/' },
-          '/about': { page: '/about' },
-          '/test': { page: '/about' },
-        }
-    }
+    // exportPathMap: async function (defaultPathMap) {
+    //     return {
+    //       '/': { page: '/' },
+    //       '/about': { page: '/about' },
+    //       '/test': { page: '/about' },
+    //     }
+    // }
 })
