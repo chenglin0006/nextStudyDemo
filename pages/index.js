@@ -26,6 +26,7 @@ class Home extends Component {
       <div>
         <h1 className='title'>Welcome to Next.js Home page!</h1>
         <h1>{this.props.num}</h1>
+        <img src="/static/img/logo.jpg"></img>
       </div>
     )
   }
