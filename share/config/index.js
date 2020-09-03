@@ -1,7 +1,7 @@
 const url = {
 	development: {
 		targetUrl: 'https://drm-test.bnq.com.cn',
-		apiUrl: 'http://web.futureshop.dev-zt.bnq.com.cn:3008',
+		apiUrl: 'https://drm-test.bnq.com.cn',
 		apiUrlFilter: '/drmAdmin',
 		authUrl: 'https://auth-test.bnq.com.cn',
 		loginAddress: 'https://auth-test.bnq.com.cn/login/login.html',

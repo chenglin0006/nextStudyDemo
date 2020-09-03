@@ -7,16 +7,18 @@ const handle = app.getRequestHandler()
 const config = require('./share/config/index');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
+console.log(process.env.NODE_ENV, '-----')
 
 //默认port
 let port = process.env.PORT || config.development.port;
 
 app.prepare().then(() => {
   const server = express()
-
+ 
+  const targetUrl = config[process.env.NODE_ENV].apiUrl;
  
 
-  server.use('/drmAdmin', createProxyMiddleware({target: 'http://drm-test.bnq.com.cn', changeOrigin: true}));
+  server.use('/drmAdmin', createProxyMiddleware({target: targetUrl, changeOrigin: true}));
 
   server.get('*', (req, res) => {
     return handle(req, res)
