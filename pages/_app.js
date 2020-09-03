@@ -1,5 +1,6 @@
 import App from 'next/app'
 import React from 'react'
+import Head from 'next/head'
 
 import withRematch from '../share/withRematch'
 import Layout from '../share/components/layout'
@@ -11,9 +12,13 @@ class MyApp extends App {
     const { Component, pageProps, reduxStore, router } = this.props;
     return (
       <Provider store={reduxStore}>
-      <Layout router={router}>
-        <Component {...pageProps} />
-      </Layout>
+       <Head>
+        <title>NEXT STUDY PAGE</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        </Head>
+        <Layout router={router}>
+            <Component {...pageProps} />
+        </Layout>
       </Provider>
     )
   }
