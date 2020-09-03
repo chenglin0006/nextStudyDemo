@@ -47,9 +47,10 @@ class Home extends Component {
           </button>
           <button onClick={incrementBy(5)}>increment by 5</button>
           <button onClick={incrementAsync}>incrementAsync</button>
-          <Button type="primary" onClick={addNumAsync}>addNumAsync</Button>
+          
         </p>
         <br />
+        <Button type="primary" onClick={addNumAsync}>addNumAsync</Button>
         <Num userAgent={this.props.userAgent}></Num>
         <div>{
             this.props.initData&&this.props.initData.map((ele) => {
