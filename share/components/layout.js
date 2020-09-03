@@ -63,11 +63,11 @@ class LayoutIndex extends Component {
 	_getHeaderMenus = (menus)=> {
 		return menus.map((item) => {
 			return (
-				<Menu.Item key={item.key} style={{top: 0}}>
-					<span onClick={() => {
-                        this.setState({headerKey:item.key})
-                        Router.push(item.defaultUrl);
-                    }}>{item.name}</span>
+				<Menu.Item key={item.key} style={{top: 0}} onClick={() => {
+                    this.setState({headerKey:item.key})
+                    Router.push(item.defaultUrl);
+                }}>
+					<span>{item.name}</span>
 				</Menu.Item>
 			)
 		});
