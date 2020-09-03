@@ -1,6 +1,7 @@
 // 服务端支持路由遮盖
 const express = require('express')
 const next = require('next')
+const { parse } = require('url')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
@@ -21,7 +22,15 @@ app.prepare().then(() => {
   server.use('/drmAdmin', createProxyMiddleware({target: targetUrl, changeOrigin: true}));
 
   server.get('*', (req, res) => {
-    return handle(req, res)
+    const parsedUrl = parse(req.url, true)
+    const { pathname, query } = parsedUrl
+
+    if (pathname === '/a') {
+        return app.render(req, res, '/about', query)
+    } else {
+        return handle(req, res, parsedUrl)
+    }
+    // return handle(req, res)
   })
 
   server.listen(port, (err) => {
