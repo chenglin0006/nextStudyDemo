@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { Tools } from '../share/util'
-import '../share/less/index.less';
 
 class Home extends Component {
     static async getInitialProps(ctx) {

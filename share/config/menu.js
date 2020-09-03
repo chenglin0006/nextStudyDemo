@@ -45,6 +45,12 @@ export const menus = [
                         icon:'appstore',
                         url:'/about'
                     },
+                    {
+                        name:'test',
+                        key: 'test',
+                        icon:'appstore',
+                        url:'/test'
+                    },
                 ]
             },
 		]
